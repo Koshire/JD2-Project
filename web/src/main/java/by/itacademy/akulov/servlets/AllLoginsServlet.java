@@ -1,7 +1,7 @@
 package by.itacademy.akulov.servlets;
 
-import by.itacademy.akulov.entity.CourseType;
-import by.itacademy.akulov.services.CourseTypeService;
+import by.itacademy.akulov.dto.LoginDto;
+import by.itacademy.akulov.services.UserService;
 import by.itacademy.akulov.utils.JspPath;
 
 import javax.servlet.ServletException;
@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Set;
+import java.util.List;
 
-@WebServlet({"/all-types"})
-public class CourseTypeServlet extends HttpServlet {
+@WebServlet({"/all-logins"})
+public class AllLoginsServlet extends HttpServlet {
 
-    private CourseTypeService courseTypeService = CourseTypeService.getInstance();
+    private UserService userService = UserService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Set<CourseType> set = this.courseTypeService.getAll();
-        req.setAttribute("allTypes", set);
+        List<LoginDto> list = userService.getAll();
+        req.setAttribute("allLogins", list);
         this.getServletContext()
-                .getRequestDispatcher(JspPath.get("course-types"))
+                .getRequestDispatcher(JspPath.get("all-logins"))
                 .forward(req, resp);
     }
 }

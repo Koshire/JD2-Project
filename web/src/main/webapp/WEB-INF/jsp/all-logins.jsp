@@ -14,8 +14,8 @@
 </head>
 <body>
 <div>
-    <c:forEach items="${requestScope.allTypes}" var="type">
-        <span>${type.name}</span><br>
+    <c:forEach items="${requestScope.allLogins}" var="login">
+        <span>${login.email}, ${login.password}, ${login.role}, ${login.id}</span><br>
     </c:forEach>
 </div>
 </body>
