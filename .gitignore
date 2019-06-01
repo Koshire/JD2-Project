@@ -3,3 +3,4 @@
 checkstyle.xml
 web.xml
 *.iml
+.lib
