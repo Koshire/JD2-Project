@@ -4,3 +4,4 @@ checkstyle.xml
 web.xml
 *.iml
 .lib
+.attach_*

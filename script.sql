@@ -15,12 +15,6 @@ CREATE TABLE course_teacher
   PRIMARY KEY (user_id, course_id)
 );
 
-CREATE TABLE blocklist
-(
-  id BIGSERIAL PRIMARY KEY,
-  user_id BIGSERIAL UNIQUE REFERENCES users (id)
-);
-
 CREATE TABLE course
 (
   id BIGSERIAL PRIMARY KEY,
@@ -67,5 +61,6 @@ CREATE TABLE users
   middle_name VARCHAR(255),
   phone VARCHAR(255),
   role VARCHAR(255),
-  result INT
+  result INT,
+  block_list BOOLEAN DEFAULT false
 );

@@ -12,16 +12,16 @@
     <property name="connection.password"/>
     <property name="show_sql">true</property>
     <property name="format_sql">true</property>
-    <property name="hibernate.hbm2ddl.auto">create</property>
+    <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
-    <mapping class="by.itacademy.akulov.entity.User"/>
-    <mapping class="by.itacademy.akulov.entity.BlockList"/>
-    <mapping class="by.itacademy.akulov.entity.StudentUser"/>
-    <mapping class="by.itacademy.akulov.entity.TeacherUser"/>
-    <mapping class="by.itacademy.akulov.entity.Course"/>
-    <mapping class="by.itacademy.akulov.entity.CourseComments"/>
-    <mapping class="by.itacademy.akulov.entity.KnowlegeBase"/>
-    <mapping class="by.itacademy.akulov.entity.KBComments"/>
-   <!-- <mapping class=""/>-->
+    <mapping class="com.itacademy.akulov.entity.User"/>
+    <mapping class="com.itacademy.akulov.entity.StudentUser"/>
+    <mapping class="com.itacademy.akulov.entity.TeacherUser"/>
+    <mapping class="com.itacademy.akulov.entity.Course"/>
+    <mapping class="com.itacademy.akulov.entity.CourseComments"/>
+    <mapping class="com.itacademy.akulov.entity.KnowlegeBase"/>
+    <mapping class="com.itacademy.akulov.entity.KBComments"/>
+    <mapping class="com.itacademy.akulov.entity.Result"/>
+
   </session-factory>
 </hibernate-configuration>
