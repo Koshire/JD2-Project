@@ -1,204 +1,119 @@
 package com.itacademy.akulov.utils;
 
-import com.itacademy.akulov.dao.CourseDao;
-import com.itacademy.akulov.dao.UserDao;
-import com.itacademy.akulov.entity.Course;
-import com.itacademy.akulov.entity.CourseType;
 import com.itacademy.akulov.entity.Role;
 import com.itacademy.akulov.entity.StudentUser;
 import com.itacademy.akulov.entity.TeacherUser;
 import com.itacademy.akulov.entity.User;
 import com.itacademy.akulov.entity.UserData;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
+@Component
 public class ItemsCreator {
 
-    private static ItemsCreator INSTANCE = new ItemsCreator();
+    private final EntityManagerFactory entityManagerFactory;
 
-    public static ItemsCreator getInstance() {
-        return INSTANCE;
+    @Autowired
+    public ItemsCreator(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
     }
 
-    private UserDao userDao = UserDao.getInstance();
-    private CourseDao courseDao = CourseDao.getInstance();
+    public void prepareData() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
 
-    public void importTestData(SessionFactory sessionFactory) {
-        try (Session session = sessionFactory.openSession()) {
+        StudentUser firstUserS = StudentUser.builder()
+                .email("firstUserS@gmail.com")
+                .blockList(Boolean.FALSE)
+                .password("123")
+                .role(Role.STUDY)
+                .userData(UserData.builder()
+                        .firstName("firstUserS")
+                        .lastName("firstUserS")
+                        .middleName("firstUserS")
+                        .build())
+                .build();
 
-            StudentUser vasya = StudentUser.builder()
-                    .email("vasya@mail.ru")
-                    .password("123")
-                    .role(Role.STUDY)
-                    .userData(UserData.builder()
-                            .phone("375445002210")
-                            .lastName("Пупкин")
-                            .middleName("Витальевич")
-                            .firstName("Василий")
-                            .build())
-                    .build();
+        StudentUser secondUserS = StudentUser.builder()
+                .email("secondUserS@gmail.com")
+                .blockList(Boolean.FALSE)
+                .password("123")
+                .role(Role.STUDY)
+                .userData(UserData.builder()
+                        .firstName("secondUserS")
+                        .lastName("secondUserS")
+                        .middleName("secondUserS")
+                        .build())
+                .build();
 
-            StudentUser petya = StudentUser.builder()
-                    .email("petya@mail.ru")
-                    .password("123")
-                    .role(Role.STUDY)
-                    .userData(UserData.builder()
-                            .phone("375445002211")
-                            .lastName("Петров")
-                            .middleName("Александрович")
-                            .firstName("Петр")
-                            .build())
-                    .build();
+        StudentUser thirdUserS = StudentUser.builder()
+                .email("thirdUserS@gmail.com")
+                .blockList(Boolean.FALSE)
+                .password("123")
+                .role(Role.STUDY)
+                .userData(UserData.builder()
+                        .firstName("thirdUserS")
+                        .lastName("thirdUserS")
+                        .middleName("thirdUserS")
+                        .build())
+                .build();
 
-            StudentUser anna = StudentUser.builder()
-                    .email("anna@mail.ru")
-                    .password("123")
-                    .role(Role.STUDY)
-                    .userData(UserData.builder()
-                            .phone("375445002212")
-                            .lastName("Василькова")
-                            .middleName("Петровна")
-                            .firstName("Анна")
-                            .build())
-                    .build();
+        TeacherUser firstUserT = TeacherUser.builder()
+                .email("firstUserT@gmail.com")
+                .blockList(Boolean.FALSE)
+                .password("123")
+                .role(Role.STUDY)
+                .userData(UserData.builder()
+                        .firstName("firstUserT")
+                        .lastName("firstUserT")
+                        .middleName("firstUserT")
+                        .build())
+                .build();
 
-            TeacherUser viktor = TeacherUser.builder()
-                    .email("viktor@mail.ru")
-                    .password("123")
-                    .role(Role.TEACH)
-                    .userData(UserData.builder()
-                            .phone("375445002213")
-                            .lastName("Фишкин")
-                            .middleName("Игоревич")
-                            .firstName("Виктор")
-                            .build())
-                    .build();
+        TeacherUser secondUserT = TeacherUser.builder()
+                .email("secondUserT@gmail.com")
+                .blockList(Boolean.FALSE)
+                .password("123")
+                .role(Role.STUDY)
+                .userData(UserData.builder()
+                        .firstName("secondUserT")
+                        .lastName("secondUserT")
+                        .middleName("secondUserT")
+                        .build())
+                .build();
 
-            TeacherUser igor = TeacherUser.builder()
-                    .email("igor@mail.ru")
-                    .password("123")
-                    .role(Role.TEACH)
-                    .userData(UserData.builder()
-                            .phone("375445002214")
-                            .lastName("Лось")
-                            .middleName("Валерьевич")
-                            .firstName("Игорь")
-                            .build())
-                    .build();
+        TeacherUser thirdUserT = TeacherUser.builder()
+                .email("thirdUserT@gmail.com")
+                .blockList(Boolean.FALSE)
+                .password("123")
+                .role(Role.STUDY)
+                .userData(UserData.builder()
+                        .firstName("thirdUserT")
+                        .lastName("thirdUserT")
+                        .middleName("thirdUserT")
+                        .build())
+                .build();
 
-            TeacherUser sveta = TeacherUser.builder()
-                    .email("sveta@mail.ru")
-                    .password("123")
-                    .role(Role.TEACH)
-                    .userData(UserData.builder()
-                            .phone("375445002214")
-                            .lastName("Синькевич")
-                            .middleName("Павловна")
-                            .firstName("Светлана")
-                            .build())
-                    .build();
+        User admin = new User(null, "admin@gmail.com", "123",
+                Role.ADMIN,
+                UserData.builder()
+                        .firstName("admin")
+                        .middleName("admin")
+                        .lastName("admin")
+                        .build(),
+                false);
+        entityManager.persist(firstUserS);
+        entityManager.persist(secondUserS);
+        entityManager.persist(thirdUserS);
+        entityManager.persist(admin);
+        entityManager.persist(firstUserT);
+        entityManager.persist(secondUserT);
+        entityManager.persist(thirdUserT);
 
-
-            User admin =
-                    new User(null, "ktaksv@gmail.com",
-                            "123", Role.ADMIN, null, false);
-
-            userDao.save(admin);
-            userDao.save(sveta);
-            userDao.save(igor);
-            userDao.save(petya);
-            userDao.save(anna);
-            userDao.save(vasya);
-            userDao.save(viktor);
-
-
-            Course course1 = Course.builder()
-                    .type(CourseType.FULL_TIME)
-                    .description("Massive")
-                    .duration(70)
-                    .startDate(LocalDate.now())
-                    .name("Java")
-                    .plan("1,2,3")
-                    .build();
-
-            Course course2 = Course.builder()
-                    .type(CourseType.FULL_TIME)
-                    .description("Counter")
-                    .duration(80)
-                    .startDate(LocalDate.now())
-                    .name("C#")
-                    .plan("1,2,3,4")
-                    .build();
-
-            course1.getTeachers().add(igor);
-            course1.getTeachers().add(viktor);
-            course1.getStudents().add(petya);
-            course1.getStudents().add(anna);
-            course2.getStudents().add(vasya);
-            course2.getTeachers().add(sveta);
-
-            sveta.getCourses().add(course1);
-
-/*            vasya.getResult().add(
-                    new Result(new Result.UserCourse(vasya.getId(), course1.getId()),
-                    5, course1, vasya));*/
-
-
-            userDao.update(vasya);
-            userDao.update(sveta);
-
-            courseDao.save(course1);
-            courseDao.save(course2);
-
-/*             CourseComments courseComments1 = CourseComments.builder()
-                    .course(course1)
-                    .courseUser(sveta)
-                    .comment("Hello World!!!")
-                    .build();
-
-            CourseComments courseComments2 = CourseComments.builder()
-                    .course(course2)
-                    .courseUser(viktor)
-                    .comment("Bye bye World!!!")
-                    .build();
-
-            session.save(courseComments1);
-            session.save(courseComments2);
-
-            KnowlegeBase knowlegeBase1 = KnowlegeBase.builder()
-                    .course(course1)
-                    .userKnowlegeBase(petya)
-                    .localDate(LocalDate.now())
-                    .text("I see you!")
-                    .build();
-
-            KnowlegeBase knowlegeBase2 = KnowlegeBase.builder()
-                    .course(course2)
-                    .userKnowlegeBase(anna)
-                    .localDate(LocalDate.now())
-                    .text("We will rock you!")
-                    .build();
-
-            session.save(knowlegeBase1);
-            session.save(knowlegeBase2);
-
-            KBComments kbComments1 = KBComments.builder()
-                    .courseUser(igor)
-                    .comment("Ku-Ku")
-                    .knowlegeBase(knowlegeBase1)
-                    .build();
-
-            KBComments kbComments2 = KBComments.builder()
-                    .courseUser(vasya)
-                    .comment("No body Ku-Ku")
-                    .knowlegeBase(knowlegeBase2)
-                    .build();
-
-            session.save(kbComments1);
-            session.save(kbComments2);
-*/
-        }
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 }

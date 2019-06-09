@@ -1,12 +1,13 @@
 package com.itacademy.akulov.servlets;
 
+import com.itacademy.akulov.config.Config;
 import com.itacademy.akulov.dto.FindDto;
 import com.itacademy.akulov.dto.LoginDto;
-import com.itacademy.akulov.dto.ViewDto;
 import com.itacademy.akulov.entity.Role;
 import com.itacademy.akulov.services.UserService;
-import com.itacademy.akulov.services.ViewService;
 import com.itacademy.akulov.utils.JspPath;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +20,9 @@ import java.util.List;
 @WebServlet({"/all-logins"})
 public class AllLoginsServlet extends HttpServlet {
 
-    private UserService userService = UserService.getInstance();
+    private ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Config.class);
+
+    private UserService userService = applicationContext.getBean(UserService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,28 +31,26 @@ public class AllLoginsServlet extends HttpServlet {
         FindDto findDto = FindDto.builder()
                 .fio(req.getParameter("fio"))
                 .blockList(Boolean.getBoolean(req.getParameter("blocklist")))
+                .page(Long.parseLong(req.getParameter("page")))
+                .viewLimit(Long.parseLong(req.getParameter("view")))
                 .build();
         if (!role.isEmpty()) {
             findDto.setRole(Role.valueOf(role));
         }
-
-        ViewDto viewDto = ViewService.calculate(ViewDto.builder()
-                .limit(Long.parseLong(req.getParameter("view")))
-                .page(Long.parseLong(req.getParameter("page")))
-                .size(userService.getSizeByCustom(findDto))
-                .build());
-
-        findDto.setLimit(viewDto.getLimit());
-        findDto.setOffset(viewDto.getOffset());
+        findDto.setSize(userService.getSizeByCustom(findDto));
+        findDto.setPages(
+                findDto.getSize() % findDto.getViewLimit() > 0
+                        ? findDto.getSize() / findDto.getViewLimit() + 1
+                        : findDto.getSize() / findDto.getViewLimit());
 
         List<LoginDto> list = userService.getByCustomLO(findDto);
 
         req.setAttribute("allLogins", list);
-        req.setAttribute("pages", viewDto.getNums());
-        req.setAttribute("view", viewDto.getLimit());
+        req.setAttribute("pages", findDto.getPages());
+        req.setAttribute("view", findDto.getViewLimit());
         req.setAttribute("fio", findDto.getFio());
         req.setAttribute("page",
-                viewDto.getPage() == 0 ? 1 : viewDto.getPage());
+                findDto.getPage() == 0 ? 1 : findDto.getPage());
 
         this.getServletContext()
                 .getRequestDispatcher(JspPath.get("all-logins"))
