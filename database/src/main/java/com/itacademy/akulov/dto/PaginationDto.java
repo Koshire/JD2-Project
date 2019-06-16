@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class FindDto {
+public class PaginationDto {
 
     private String fio;
     private Role role;
