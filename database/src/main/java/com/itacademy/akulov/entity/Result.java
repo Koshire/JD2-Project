@@ -47,28 +47,12 @@ public class Result {
     @AllArgsConstructor
     public static class UserCourse implements Serializable {
 
-        static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 1L;
 
         @Column(name = "user_id")
         private Long userId;
 
         @Column(name = "course_id")
         private Long courseId;
-
-        public Long getUserId() {
-            return userId;
-        }
-
-        public void setUserId(Long userId) {
-            this.userId = userId;
-        }
-
-        public Long getCourseId() {
-            return courseId;
-        }
-
-        public void setCourseId(Long courseId) {
-            this.courseId = courseId;
-        }
     }
 }

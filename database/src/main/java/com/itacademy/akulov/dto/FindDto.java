@@ -15,6 +15,8 @@ public class FindDto {
     private String fio;
     private Role role;
     private Boolean blockList;
-    private Long limit;
-    private Long offset;
+    private Long viewLimit;
+    private Long page;
+    private Long pages;
+    private Long size;
 }
