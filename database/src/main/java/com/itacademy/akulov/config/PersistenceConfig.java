@@ -2,7 +2,6 @@ package com.itacademy.akulov.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
@@ -22,7 +21,6 @@ import java.util.Properties;
 @PropertySource({"classpath:database.properties", "classpath:hibernate.properties"})
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "com.itacademy.akulov.repository")
-@ComponentScan("com.itacademy.akulov.repository")
 public class PersistenceConfig {
 
     @Bean
@@ -54,7 +52,7 @@ public class PersistenceConfig {
     }
 
     @Bean
-    public Properties jpaProperties(@Value("hibernate.properties") Resource hibernateProperties) throws IOException {
+    public Properties jpaProperties(@Value("classpath:hibernate.properties") Resource hibernateProperties) throws IOException {
         Properties properties = new Properties();
         properties.load(hibernateProperties.getInputStream());
 
