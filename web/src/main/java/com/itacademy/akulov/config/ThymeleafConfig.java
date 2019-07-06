@@ -2,6 +2,7 @@ package com.itacademy.akulov.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
@@ -17,6 +18,7 @@ public class ThymeleafConfig {
         resolver.setCharacterEncoding(UTF_8.name());
         resolver.setPrefix("/WEB-INF/html/");
         resolver.setSuffix(".html");
+        resolver.setCacheable(false);
         return resolver;
     }
 
@@ -24,6 +26,7 @@ public class ThymeleafConfig {
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.setEnableSpringELCompiler(true);
+        engine.addDialect(new SpringSecurityDialect());
         engine.setTemplateResolver(templateResolver());
         return engine;
     }

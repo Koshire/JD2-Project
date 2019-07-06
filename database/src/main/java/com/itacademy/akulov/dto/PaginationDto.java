@@ -1,6 +1,5 @@
 package com.itacademy.akulov.dto;
 
-import com.itacademy.akulov.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,11 +11,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PaginationDto {
 
-    private String fio;
-    private Role role;
-    private Boolean blockList;
-    private Long viewLimit;
-    private Long page;
-    private Long pages;
-    private Long size;
+    private Integer page;
+    private Integer pageSize;
+    private Integer totalPages;
+    private Integer totalElements;
+    private String parameter1;
+    private String parameter2;
+    private String parameter3;
+    private String parameter4;
 }

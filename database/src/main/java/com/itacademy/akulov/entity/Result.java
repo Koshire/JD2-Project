@@ -45,6 +45,7 @@ public class Result {
     @Embeddable
     @NoArgsConstructor
     @AllArgsConstructor
+    @Builder
     public static class UserCourse implements Serializable {
 
         private static final long serialVersionUID = 1L;

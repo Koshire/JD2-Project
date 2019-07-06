@@ -6,13 +6,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.util.List;
 
@@ -25,8 +22,8 @@ import java.util.List;
 @DiscriminatorValue("student_user")
 public class StudentUser extends User {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userResult", fetch = FetchType.EAGER)
-    @Fetch(FetchMode.SELECT)
+    @OneToMany
+    @JoinColumn(name = "user_id")
     private List<Result> result;
 
     @Builder

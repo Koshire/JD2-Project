@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Service
 @Transactional
-//@RequiredArgsConstructor
 public class AuthUserImpl implements AuthUser {
 
 

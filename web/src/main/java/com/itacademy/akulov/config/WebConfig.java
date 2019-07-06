@@ -1,23 +1,28 @@
 package com.itacademy.akulov.config;
 
-import com.itacademy.akulov.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.google.gson.Gson;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.itacademy.akulov.controller"})
 @Import(value = {InternationalizationConfig.class, ThymeleafConfig.class})
-public class WebConfig {
+public class WebConfig implements WebMvcConfigurer {
 
-    private UserService userService;
-
-    @Autowired
-    public WebConfig(UserService userService) {
-        this.userService = userService;
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**")
+                .addResourceLocations("/static/");
     }
 
+    @Bean
+    public Gson jsonConverter() {
+        return new Gson();
+    }
 }

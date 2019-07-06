@@ -18,4 +18,6 @@ public class LoginDto {
     private String name;
     private String middle;
     private String last;
+    private String phone;
+    private String language;
 }
