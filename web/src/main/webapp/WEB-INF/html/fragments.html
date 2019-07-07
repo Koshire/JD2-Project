@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="language">
+    <form>
+        <input type="button" onclick="localeRu()" value="Рус">
+        <input type="button" onclick="localeEn()" value="Eng">
+        <input type="button" onclick="logout()" th:value="#{button.logout}">
+        <input type="button" onclick="uProfile()" th:value="#{button.profile}">
+        <input type="button" onclick="goHome()" th:value="#{button.home}">
+        <input type="button" onclick="createCourse()" th:value="#{button.createcourse}">
+        <input type="button" onclick="allUsers()" th:value="#{button.allusers}">
+    </form>
+</div>
+
+<div th:fragment="menu">
+    <a href="/home">Мои коментарии</a>
+    <a href="/home">Контакты</a>
+</div>
+</body>
+</html>

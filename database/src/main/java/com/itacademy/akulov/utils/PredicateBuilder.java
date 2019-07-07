@@ -1,4 +1,4 @@
-package utils;
+package com.itacademy.akulov.utils;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;

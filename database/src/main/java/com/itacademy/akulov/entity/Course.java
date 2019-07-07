@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.OptimisticLockType;
+import org.hibernate.annotations.OptimisticLocking;
+import org.springframework.data.annotation.Version;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,6 +34,7 @@ import java.util.List;
 @Accessors(chain = true)
 @Entity
 @Table(name = "course")
+@OptimisticLocking(type = OptimisticLockType.VERSION)
 public class Course implements BaseEntity<Long> {
 
     @Id
@@ -41,7 +45,6 @@ public class Course implements BaseEntity<Long> {
     private CourseType type;
 
     @Column(name = "start_date")
-    //@Temporal(TemporalType.DATE)
     private LocalDate startDate;
 
     @Column(name = "duration_hours")
@@ -63,19 +66,23 @@ public class Course implements BaseEntity<Long> {
     @Fetch(FetchMode.SUBSELECT)
     private List<TeacherUser> teachers = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany/*(cascade = CascadeType.ALL)*/
     @JoinTable(name = "course_student",
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
-    @Fetch(FetchMode.SUBSELECT)
+/*    @Fetch(FetchMode.SUBSELECT)*/
     private List<StudentUser> students = new ArrayList<>();
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Fetch(FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "course"/*, cascade = CascadeType.ALL, orphanRemoval = true*/)
+/*    @Fetch(FetchMode.SUBSELECT)*/
     private List<CourseComments> courseComments = new ArrayList<>();
 
+    @Version
+    private Long version;
+
     @Builder
-    public Course(CourseType type, LocalDate startDate, Integer duration, String name, String description, String plan) {
+    public Course(Long id, CourseType type, LocalDate startDate, Integer duration, String name, String description, String plan) {
+        this.id = id;
         this.type = type;
         this.startDate = startDate;
         this.duration = duration;

@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Data
@@ -28,12 +27,11 @@ public class CourseComments implements BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
 
     @OneToOne
-    @PrimaryKeyJoinColumn
-    private User courseUser;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "course_id")

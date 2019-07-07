@@ -18,4 +18,7 @@ public class LoginDto {
     private String name;
     private String middle;
     private String last;
+    private String phone;
+    private boolean blockList;
+    private String language;
 }

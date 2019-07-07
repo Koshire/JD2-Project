@@ -29,6 +29,7 @@ CREATE TABLE course
 create table course_comments
 (
   id BIGSERIAL PRIMARY KEY,
+  user_id BIGINT REFERENCES users (id),
   comment VARCHAR(255),
   course_id BIGSERIAL REFERENCES course (id)
 );

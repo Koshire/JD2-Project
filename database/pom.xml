@@ -9,12 +9,16 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-
     <artifactId>database</artifactId>
 
     <packaging>jar</packaging>
 
     <dependencies>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
@@ -34,16 +38,17 @@
             <version>5.4.2.Final</version>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-jdbc</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
 
         <dependency>
@@ -79,5 +84,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 </project>
