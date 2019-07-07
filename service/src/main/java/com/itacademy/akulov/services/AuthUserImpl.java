@@ -29,7 +29,7 @@ public class AuthUserImpl implements AuthUser {
                         .username(user.get().getEmail())
                         .password(user.get().getPassword())
                         .authorities(user.get().getRole())
-                        .accountLocked(user.get().isBlackList())
+                        .accountLocked(user.get().isBlockList())
                         .build())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }

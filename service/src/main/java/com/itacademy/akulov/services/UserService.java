@@ -1,8 +1,13 @@
 package com.itacademy.akulov.services;
 
 import com.itacademy.akulov.dto.LoginDto;
+import com.itacademy.akulov.entity.Role;
+import com.itacademy.akulov.entity.StudentUser;
+import com.itacademy.akulov.entity.TeacherUser;
 import com.itacademy.akulov.entity.User;
 import com.itacademy.akulov.mapper.LoginMapper;
+import com.itacademy.akulov.mapper.StudentMapper;
+import com.itacademy.akulov.mapper.TeacherMapper;
 import com.itacademy.akulov.repository.StudentUserRepository;
 import com.itacademy.akulov.repository.TeacherUserRepository;
 import com.itacademy.akulov.repository.UserRepository;
@@ -23,6 +28,8 @@ public class UserService {
     private UserRepository userRepository;
     private StudentUserRepository studentUserRepository;
     private TeacherUserRepository teacherUserRepository;
+    private StudentMapper studentMapper = StudentMapper.getInstance();
+    private TeacherMapper teacherMapper = TeacherMapper.getInstance();
 
     @Autowired
     public UserService(UserRepository userRepository,
@@ -47,6 +54,39 @@ public class UserService {
         return result > 0;
     }
 
+    public boolean blockById(Long id) {
+        Long result = 0L;
+        if (userRepository.findById(id).isPresent()) {
+            User check = userRepository.findById(id).get();
+            if (check.getRole().equals(Role.STUDY)) {
+                StudentUser studentUser = studentUserRepository.findById(id).get();
+                if (studentUser.getBlockList()) {
+                    studentUser.setBlockList(false);
+                } else {
+                    studentUser.setBlockList(true);
+                }
+                result = studentUserRepository.save(studentUser).getId();
+            } else if (check.getRole().equals(Role.TEACH)) {
+                TeacherUser teacherUser = teacherUserRepository.findById(id).get();
+                if (teacherUser.getBlockList()) {
+                    teacherUser.setBlockList(false);
+                } else {
+                    teacherUser.setBlockList(true);
+                }
+                result = teacherUserRepository.save(teacherUser).getId();
+            } else {
+                User user = userRepository.findById(id).get();
+                if (user.getBlockList()) {
+                    user.setBlockList(false);
+                } else {
+                    user.setBlockList(true);
+                }
+                result = userRepository.save(user).getId();
+            }
+        }
+        return result > 0;
+    }
+
     public List<LoginDto> getAll() {
         List<LoginDto> list = new ArrayList<>();
         userRepository.findAll().forEach(user -> {
@@ -64,13 +104,24 @@ public class UserService {
     }
 
     public Long updateUser(LoginDto loginDto) {
-        Long id = 0L;
+        Long result = 0L;
         if (userRepository.findById(loginDto.getId()).isPresent()) {
-            User user = userRepository.findById(loginDto.getId()).get();
-            user = loginMapper.mapToEntity(loginDto);
-            id = userRepository.save(user).getId();
+            User check = userRepository.findById(loginDto.getId()).get();
+            if (check.getRole().equals(Role.STUDY)) {
+                StudentUser studentUser = studentUserRepository.findById(loginDto.getId()).get();
+                studentUser = studentMapper.mapToEntity(loginDto);
+                result = studentUserRepository.save(studentUser).getId();
+            } else if (check.getRole().equals(Role.TEACH)) {
+                TeacherUser teacherUser = teacherUserRepository.findById(loginDto.getId()).get();
+                teacherUser = teacherMapper.mapToEntity(loginDto);
+                result = teacherUserRepository.save(teacherUser).getId();
+            } else {
+                User user = userRepository.findById(loginDto.getId()).get();
+                user = loginMapper.mapToEntity(loginDto);
+                result = userRepository.save(user).getId();
+            }
         }
-        return id;
+        return result;
     }
 
     public Long saveTeacherUser(LoginDto loginDto) {

@@ -22,7 +22,7 @@ public class LoginMapper implements BaseMapper<User, LoginDto> {
                 .middle(entity.getUserData().getMiddleName())
                 .last(entity.getUserData().getLastName())
                 .phone(entity.getUserData().getPhone())
-                .blackList(entity.getBlockList())
+                .blockList(entity.getBlockList())
                 .build();
     }
 
@@ -40,7 +40,7 @@ public class LoginMapper implements BaseMapper<User, LoginDto> {
                 .setEmail(dto.getEmail())
                 .setPassword(dto.getPassword())
                 .setRole(Role.valueOf(dto.getRole()))
-                .setBlockList(dto.isBlackList())
+                .setBlockList(dto.isBlockList())
                 .setUserData(UserData.builder()
                         .lastName(dto.getLast())
                         .middleName(dto.getMiddle())
