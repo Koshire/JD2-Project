@@ -1,6 +1,7 @@
 package com.itacademy.akulov.services;
 
 import com.itacademy.akulov.dto.LoginDto;
+import com.itacademy.akulov.entity.User;
 import com.itacademy.akulov.mapper.LoginMapper;
 import com.itacademy.akulov.repository.StudentUserRepository;
 import com.itacademy.akulov.repository.TeacherUserRepository;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,8 +34,25 @@ public class UserService {
         this.teacherUserRepository = teacherUserRepository;
     }
 
-    public Optional<LoginDto> getById(Long id){
+    public Optional<LoginDto> getById(Long id) {
         return userRepository.findById(id).map(loginMapper::mapToDto);
+    }
+
+    public boolean deleteById(Long id) {
+        Long result = 0L;
+        if (userRepository.findById(id).isPresent()) {
+            userRepository.delete(userRepository.findById(id).get());
+            result = 1L;
+        }
+        return result > 0;
+    }
+
+    public List<LoginDto> getAll() {
+        List<LoginDto> list = new ArrayList<>();
+        userRepository.findAll().forEach(user -> {
+            list.add(loginMapper.mapToDto(user));
+        });
+        return list;
     }
 
     public Optional<LoginDto> getLogin(String email) {
@@ -44,7 +64,13 @@ public class UserService {
     }
 
     public Long updateUser(LoginDto loginDto) {
-        return userRepository.save(loginMapper.mapToStudentEntity(loginDto)).getId();
+        Long id = 0L;
+        if (userRepository.findById(loginDto.getId()).isPresent()) {
+            User user = userRepository.findById(loginDto.getId()).get();
+            user = loginMapper.mapToEntity(loginDto);
+            id = userRepository.save(user).getId();
+        }
+        return id;
     }
 
     public Long saveTeacherUser(LoginDto loginDto) {

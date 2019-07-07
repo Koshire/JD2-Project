@@ -19,5 +19,6 @@ public class LoginDto {
     private String middle;
     private String last;
     private String phone;
+    private boolean blackList;
     private String language;
 }
