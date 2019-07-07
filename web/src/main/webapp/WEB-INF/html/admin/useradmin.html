@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8"/>
+    <title th:text="#{admin.users}">Hello world ! ! !</title>
+    <script src="js/changeLang.js"></script>
+</head>
+<body>
+<div th:replace="fragments :: language"></div>
+<br>
+<H1 th:text="#{admin.users}">hello world</H1>
+
+<div>
+    <span id="userGratis"></span>
+</div>
+
+
+    <br>
+    <span th:text="#{u.users}"></span>
+    <br>
+    <div th:each="user: ${users}">
+        <input type="text" th:value="${user.getId()}" name="courseId" hidden>
+        <span th:text="${user.getEmail()}"></span>
+        <span> </span>
+        <span th:text="${user.getName()}"></span>
+        <span> </span>
+        <span th:text="${user.getMiddle()}"></span>
+        <span> </span>
+        <span th:text="${user.getLast()}"></span>
+        <span> </span>
+        <span th:text="${user.isBlackList()}"></span><br>
+        <a th:href="@{/udelete/{id}(id=${user.getId()})}" th:text="#{button.delete}"></a>
+        <span> / </span>
+        <a th:href="@{/ublock/{id}(id=${user.getId()})}" th:text="#{button.blocklist}"></a>
+        <span> / </span>
+        <a th:href="@{/aprofile/{id}/{role}(id = ${user.getId()}, role = ${user.getRole()})}" th:text="#{course.button.show}"></a>
+    </div>
+</body>
+</html>

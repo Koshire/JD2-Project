@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8"/>
+    <title th:text="#{text.course.mycomments}">Hello world ! ! !</title>
+    <script src="/web/js/changeLang.js"></script>
+</head>
+<body>
+<div th:replace="fragments :: language"></div>
+<hr>
+<H2 th:text="#{text.course.mycomments}"></H2>
+<br>
+<hr>
+<form th:each="comment: ${comments}">
+    <span th th:text="${comment.getCourse().getName()}"></span><br>
+    <span th th:text="${comment.getUser().getName()}"></span>
+    <span> </span>
+    <span th th:text="${comment.getUser().getMiddle()}"></span>
+    <span> </span>
+    <span th th:text="${comment.getUser().getLast()}"></span><br>
+    <span th:text="${comment.getComment()}"></span><br>
+    <a th:href="@{/delccomments/{id}(id=${comment.getId()})}" th:text="#{button.delete}"></a>
+    <hr>
+</form>
+
+</body>
+</html>

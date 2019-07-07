@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8"/>
+    <title>Hello world ! ! !</title>
+    <script src="/web/js/changeLang.js"></script>
+</head>
+<body>
+<div th:replace="fragments :: language"></div>
+<hr>
+<H2 th:text="#{u.profile}"></H2>
+<br>
+
+<form method="post">
+    <input type="text" id="id" name="id" size="50" th:value="${user.getId()}" hidden><br>
+
+    <label for="email" th:text="#{u.email}"></label>
+    <input type="text" id="email" name="email" size="50" th:value="${user.getEmail()}" required><br>
+
+    <label for="newPassword" th:text="#{u.password}"></label>
+    <input type="password" name="newPassword" id="newPassword" size="50"><br>
+
+    <input type="password" id="currentPassword" name="currentPassword" size="50" th:value="${user.getPassword()}" hidden><br>
+
+    <label for="uname" th:text="#{u.uname}"></label>
+    <input type="text" id="uname" name="uname" size="50" th:value="${user.getName()}" required><br>
+
+    <label for="mname" th:text="#{u.mname}"></label>
+    <input type="text" id="mname" name="mname" size="50" th:value="${user.getMiddle()}" required><br>
+
+    <label for="lname" th:text="#{u.lname}"></label>
+    <input type="text" id="lname" name="lname" size="50" th:value="${user.getLast()}" required><br>
+
+    <span th:text="${user.getRole()}"></span>
+    <input type="text" id="role" name="role" size="50" th:value="${user.getRole()}" hidden>
+    <br>
+
+    <label for="block" th:text="#{u.block}"></label>
+    <input type="text" name="block" id="block" size="50" th:value="${user.isBlockList()}" disabled>
+    <br>
+
+    <label for="phone" th:text="#{u.phone}"></label>
+    <input type="text" id="phone" name="phone" size="50" th:value="${user.getPhone()}" required>
+    <br>
+    <button formaction="/web/upprofile" th:text="#{button.update}"></button>
+</form>
+
+<br>
+<a th:href="@{/myccomments/{id}(id=${userId})}" th:text="#{text.show.commnets}"></a>
+<br>
+
+<form sec:authorize="hasAuthority('STUDY')" th:each="item: ${user.getResults()}">
+    <span th th:text="${item.getCourse().getName()}"></span>
+    <span th:text="#{u.result}"></span>
+    <span th:text="${item.getResult()}"></span>
+</form>
+
+<form sec:authorize="hasAuthority('TEACH')" th:each="item: ${user.getCourse()}">
+    <span th th:text="${item.getName()}"></span>
+    <a th:href="@{/course(id=${item.getId()})}" th:text="#{c.detail}"></a>
+    <a th:href="@{/results/{id}(id=${item.getId()})}" th:text="#{c.results}"></a>
+</form>
+
+</body>
+</html>

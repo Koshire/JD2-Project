@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8"/>
+    <title th:text="#{course.save}">Hello world ! ! !</title>
+    <script src="js/coursecreate.js"></script>
+    <script src="js/changeLang.js"></script>
+</head>
+<body onload="init()">
+<div th:replace="fragments :: language"></div>
+<H1 th:text="#{course.save}">HELLO ! ! ! WORLD ! ! !</H1>
+
+<div>
+    <span id="userGratis"></span>
+</div>
+
+<div id="course">
+    <form method="POST" id="form">
+        <label for="name" th:text="#{course.name}">Название курса:</label><br>
+        <input required type="text" id="name" name="name" size="50"><br>
+
+        <label for="description" th:text="#{course.description}">Описание:</label><br>
+        <textarea required id="description" name="description" cols="50" rows="5"></textarea><br>
+
+        <label for="startDate" th:text="#{course.start}">Начало занятий:</label><br>
+        <input required type="date" id="startDate" name="startDate" size="50" th:value="${localDate}"><br>
+
+        <label for="duration" th:text="#{course.duration}">Длительность курса:</label><br>
+        <input required type="number" id="duration" name="duration" size="50"><br>
+
+        <label for="plan" th:text="#{course.plan}">План:</label><br>
+        <textarea id="plan" name="plan" cols="50" rows="5"></textarea><br>
+
+        <label for="type" th:text="#{course.type}">Тип курса:</label><br>
+        <select id="type" name="type">
+            <option th:each="type : ${types}" th:value="${type.getName()}" th:text="${type}"></option>
+        </select><br>
+        <br><br>
+
+        <input type="button" id="saveButton" onclick="saveCourse()" th:value="#{course.create}">
+        <input type="reset" th:value="#{course.reset}">
+    </form>
+    <hr>
+</div>
+
+</body>
+</html>

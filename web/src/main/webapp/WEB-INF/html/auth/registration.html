@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8"/>
+    <title th:text="#{register.title}">Регистрация.</title>
+    <script type="text/javascript" src="js/validate.js"></script>
+    <script type="text/javascript" src="js/changeLang.js"></script>
+</head>
+<body onload="initTranslate()">
+<div th:replace="fragments :: language"></div>
+<div>
+    <h3 th:text="#{register.title}">Регистрация:</h3>
+    <form action="/registration" method="post">
+        <select id="role" name="role">
+            <option value="TEACH" th:text="#{register.teacher}">Преподаватель</option>
+            <option value="STUDY" selected th:text="#{register.student}">Учащийся</option>
+        </select><br>
+        <label for="email" th:text="#{register.login}">Логин (электронная почта):</label><br>
+        <input type="text" id="email" name="login" size="30" maxlength="50" onchange="validate_email()" required>
+        <span id='message_email'></span><br>
+
+        <label for="password" th:text="#{register.password}">Пароль:</label><br>
+        <input type="password" id="password" name="password" size="30" maxlength="50" onchange="validate_password();"
+               required>
+        <p><span id='message_password'></span></p>
+
+        <label for="confirm_password" th:text="#{register.passConfirm}">Повторите пароль:</label><br>
+        <input type="password" id="confirm_password" name="password_confirm" size="30" maxlength="50" required
+               onchange="check_confirm_password();">
+        <span id='message_confirm'></span><br>
+
+        <label for="first_name" th:text="#{register.name}">Имя:</label><br>
+        <input type="text" id="first_name" name="first_name" size="30" maxlength="124" required><br>
+        <label for="middle_name" th:text="#{register.middle}">Отчество:</label><br>
+        <input type="text" id="middle_name" name="middle_name" size="30" maxlength="124" required><br>
+        <label for="last_name" th:text="#{register.last}">Фамилия:</label><br>
+        <input type="text" id="last_name" name="last_name" size="30" maxlength="124" required><br>
+
+        <label for="phone" th:text="#{register.phone}">Телефон в формате xxx-xx-xxxxxxx:</label><br>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{7}" size="30" maxlength="14"
+               onchange='ValidatePhoneNumber()'>
+        <span id='message_phone'></span><br>
+        <input type="text" id="language" name="language" hidden disabled="true" value="en_US">
+        <br>
+        <input type="button" onclick="onSubmitRegistration()" th:value="#{login.register}">
+        <span id='message'></span><br>
+        <br>
+    </form>
+</div>
+</body>
+</html>

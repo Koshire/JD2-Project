@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8"/>
+    <title>Hello world ! ! !</title>
+    <script src="/web/js/changeLang.js"></script>
+</head>
+<body>
+<div th:replace="fragments :: language"></div>
+<hr>
+<H2 th:text="#{r.results}"></H2>
+<br>
+
+<form method="post" th:each="item: ${results}">
+
+    <input type="text" name="courseId" th:value="${item.getCourse().getId()}" hidden>
+    <input type="text" name="userId" th:value="${item.getUserResult().getId()}" hidden>
+    <span th th:text="${item.getUserResult().getName()}"></span>
+    <span> </span>
+    <span th th:text="${item.getUserResult().getMiddle()}"></span>
+    <span> </span>
+    <span th th:text="${item.getUserResult().getLast()}"></span>
+    <span th:text="#{u.result}"></span>
+    <input type="number" name="result" max="10" min="1" th:value="${item.getResult()}">
+    <button formaction="/web/upresult" th:text="#{button.update}"></button><br>
+</form>
+</body>
+</html>
