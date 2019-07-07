@@ -51,7 +51,8 @@ public class KnowlegeBase implements BaseEntity<Long> {
     private List<KBComments> kbComments = new ArrayList<>();
 
     @Builder
-    public KnowlegeBase(Course course, User userKnowlegeBase, LocalDate localDate, String text) {
+    public KnowlegeBase(Long id, Course course, User userKnowlegeBase, LocalDate localDate, String text) {
+        this.id = id;
         this.course = course;
         this.userKnowlegeBase = userKnowlegeBase;
         this.localDate = localDate;
