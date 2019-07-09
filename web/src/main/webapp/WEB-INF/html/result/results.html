@@ -23,7 +23,7 @@
     <span th th:text="${item.getUserResult().getLast()}"></span>
     <span th:text="#{u.result}"></span>
     <input type="number" name="result" max="10" min="1" th:value="${item.getResult()}">
-    <button formaction="/web/upresult" th:text="#{button.update}"></button><br>
+    <button sec:authorize="hasAnyAuthority('ADMIN', 'TEACH')" formaction="/web/upresult" th:text="#{button.update}"></button><br>
 </form>
 </body>
 </html>

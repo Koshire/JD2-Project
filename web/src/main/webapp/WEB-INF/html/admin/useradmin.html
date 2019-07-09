@@ -29,7 +29,7 @@
         <span> </span>
         <span th:text="${user.getLast()}"></span>
         <span> </span>
-        <span th:text="${user.isBlackList()}"></span><br>
+        <span th:text="${user.isBlockList()}"></span><br>
         <a th:href="@{/udelete/{id}(id=${user.getId()})}" th:text="#{button.delete}"></a>
         <span> / </span>
         <a th:href="@{/ublock/{id}(id=${user.getId()})}" th:text="#{button.blocklist}"></a>

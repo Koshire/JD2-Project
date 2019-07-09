@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.OptimisticLockType;
 import org.hibernate.annotations.OptimisticLocking;
 import org.springframework.data.annotation.Version;
@@ -59,23 +57,24 @@ public class Course implements BaseEntity<Long> {
     @Column(name = "plan")
     private String plan;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "course_teacher",
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
-    @Fetch(FetchMode.SUBSELECT)
     private List<TeacherUser> teachers = new ArrayList<>();
 
-    @ManyToMany/*(cascade = CascadeType.ALL)*/
+    @ManyToMany
     @JoinTable(name = "course_student",
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
 /*    @Fetch(FetchMode.SUBSELECT)*/
     private List<StudentUser> students = new ArrayList<>();
 
-    @OneToMany(mappedBy = "course"/*, cascade = CascadeType.ALL, orphanRemoval = true*/)
-/*    @Fetch(FetchMode.SUBSELECT)*/
+    @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE)
     private List<CourseComments> courseComments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE)
+    private List<KnowlegeBase> knowlegeBases;
 
     @Version
     private Long version;

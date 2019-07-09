@@ -25,6 +25,8 @@ public class CourseTeacher {
     @EmbeddedId
     private UserCourse userCourse;
 
+
+
     @Data
     @Embeddable
     @NoArgsConstructor

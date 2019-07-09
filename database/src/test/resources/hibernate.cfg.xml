@@ -20,7 +20,6 @@
     <mapping class="com.itacademy.akulov.entity.Course"/>
     <mapping class="com.itacademy.akulov.entity.CourseComments"/>
     <mapping class="com.itacademy.akulov.entity.KnowlegeBase"/>
-    <mapping class="com.itacademy.akulov.entity.KBComments"/>
     <mapping class="com.itacademy.akulov.entity.Result"/>
 
   </session-factory>

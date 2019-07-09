@@ -1,0 +1,10 @@
+2019-07-07 23:13:48,423 INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2019-07-07 23:13:48,541 INFO  - HHH000412: Hibernate Core {5.4.2.Final}
+2019-07-07 23:13:48,549 INFO  - HHH000205: Loaded properties from resource hibernate.properties: {hibernate.dialect=org.hibernate.dialect.PostgreSQL95Dialect, hibernate.show_sql=true, hibernate.bytecode.use_reflection_optimizer=false, hibernate.hbm2ddl.auto=validate, hibernate.format_sql=true}
+2019-07-07 23:13:48,831 INFO  - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2019-07-07 23:13:49,367 INFO  - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2019-07-07 23:13:50,767 WARN  - HHH015011: Unable to locate static metamodel field : com.itacademy.akulov.entity.UserData_#lastName; this may or may not indicate a problem with the static metamodel
+2019-07-07 23:13:50,767 WARN  - HHH015011: Unable to locate static metamodel field : com.itacademy.akulov.entity.UserData_#middleName; this may or may not indicate a problem with the static metamodel
+2019-07-07 23:13:50,768 WARN  - HHH015011: Unable to locate static metamodel field : com.itacademy.akulov.entity.UserData_#phone; this may or may not indicate a problem with the static metamodel
+2019-07-07 23:13:50,768 WARN  - HHH015011: Unable to locate static metamodel field : com.itacademy.akulov.entity.UserData_#firstName; this may or may not indicate a problem with the static metamodel
+2019-07-07 23:13:50,841 INFO  - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]

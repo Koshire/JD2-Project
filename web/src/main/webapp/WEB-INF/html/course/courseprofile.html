@@ -56,6 +56,7 @@
            th:value="#{button.be.student}"/>
     <input sec:authorize="hasAuthority('TEACH')" type="button" id="beTeach" name="beTeach" onclick="beTeacher()"
            th:value="#{button.be.teacher}"/><br>
+    <input type="button" onclick="createKb()" th:value="#{button.createkb}">
 </div>
 <br>
 <input type="button" onclick="showComments()" th:value="#{button.show.hide}">
@@ -80,7 +81,7 @@
 
     <br>
     <textarea id="commentText" cols="50" rows="3"></textarea>
-    <input type="button" onclick="sendComment()">
+    <input type="button" onclick="sendComment()" th:value="#{button.send}">
     <br>
 
     <div id="comments">

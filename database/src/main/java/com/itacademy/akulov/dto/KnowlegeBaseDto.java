@@ -16,5 +16,4 @@ public class KnowlegeBaseDto {
     private LoginDto userKnowlegeBase;
     private String localDate;
     private String text;
-    //private List<KBComments> kbComments = new ArrayList<>();
 }

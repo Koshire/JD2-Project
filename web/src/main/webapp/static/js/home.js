@@ -78,10 +78,11 @@ function back() {
 
 function forward() {
     let totalPages = document.getElementById("of").innerText;
+    let zero = 0;
     let pageSize = getPageSize();
     let param = getParam();
     let page = document.getElementById("page").innerText;
-    if (page !== totalPages) {
+    if (page !== totalPages && totalPages !== "0") {
         getCourses(pagination(page, pageSize, 0, param.param1, param.param2, param.param3, param.param4));
     }
 

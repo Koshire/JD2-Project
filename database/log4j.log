@@ -1,11 +1,11 @@
-2019-07-07 16:41:13,083 INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
-2019-07-07 16:41:13,158 INFO  - HHH000412: Hibernate Core {5.4.2.Final}
-2019-07-07 16:41:13,161 INFO  - HHH000205: Loaded properties from resource hibernate.properties: {hibernate.dialect=org.hibernate.dialect.H2Dialect, hibernate.show_sql=true, hibernate.bytecode.use_reflection_optimizer=false, hibernate.hbm2ddl.auto=create-drop, hibernate.format_sql=true}
-2019-07-07 16:41:13,289 INFO  - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
-2019-07-07 16:41:13,654 INFO  - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
-2019-07-07 16:41:14,693 WARN  - HHH015011: Unable to locate static metamodel field : com.itacademy.akulov.entity.UserData_#phone; this may or may not indicate a problem with the static metamodel
-2019-07-07 16:41:14,693 WARN  - HHH015011: Unable to locate static metamodel field : com.itacademy.akulov.entity.UserData_#middleName; this may or may not indicate a problem with the static metamodel
-2019-07-07 16:41:14,693 WARN  - HHH015011: Unable to locate static metamodel field : com.itacademy.akulov.entity.UserData_#lastName; this may or may not indicate a problem with the static metamodel
-2019-07-07 16:41:14,693 WARN  - HHH015011: Unable to locate static metamodel field : com.itacademy.akulov.entity.UserData_#firstName; this may or may not indicate a problem with the static metamodel
-2019-07-07 16:41:14,770 INFO  - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2019-07-07 16:41:15,454 INFO  - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2019-07-09 12:23:28,959 INFO  - HHH000204: Processing PersistenceUnitInfo [name: default]
+2019-07-09 12:23:29,086 INFO  - HHH000412: Hibernate Core {5.4.2.Final}
+2019-07-09 12:23:29,089 INFO  - HHH000205: Loaded properties from resource hibernate.properties: {hibernate.dialect=org.hibernate.dialect.H2Dialect, hibernate.show_sql=true, hibernate.bytecode.use_reflection_optimizer=false, hibernate.hbm2ddl.auto=create-drop, hibernate.format_sql=true}
+2019-07-09 12:23:29,280 INFO  - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2019-07-09 12:23:29,773 INFO  - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2019-07-09 12:23:30,963 WARN  - HHH015011: Unable to locate static metamodel field : com.itacademy.akulov.entity.UserData_#firstName; this may or may not indicate a problem with the static metamodel
+2019-07-09 12:23:30,963 WARN  - HHH015011: Unable to locate static metamodel field : com.itacademy.akulov.entity.UserData_#phone; this may or may not indicate a problem with the static metamodel
+2019-07-09 12:23:30,964 WARN  - HHH015011: Unable to locate static metamodel field : com.itacademy.akulov.entity.UserData_#lastName; this may or may not indicate a problem with the static metamodel
+2019-07-09 12:23:30,964 WARN  - HHH015011: Unable to locate static metamodel field : com.itacademy.akulov.entity.UserData_#middleName; this may or may not indicate a problem with the static metamodel
+2019-07-09 12:23:31,066 INFO  - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2019-07-09 12:23:32,835 INFO  - HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'

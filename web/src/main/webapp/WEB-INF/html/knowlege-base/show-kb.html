@@ -16,22 +16,17 @@
 </div>
     <br>
     <br>
-    <div th:each="user: ${users}">
-        <input type="text" th:value="${user.getId()}" name="courseId" hidden>
-        <span th:text="${user.getEmail()}"></span>
+    <div th:each="kb: ${kbs}">
+        <input type="text" th:value="${kb.getId()}" name="kbId" hidden>
+        <span th:text="${kb.getCourseDtoC().getName()}"></span><br>
+        <span th:text="${kb.getUserKnowlegeBase().getName()}"></span>
         <span> </span>
-        <span th:text="${user.getName()}"></span>
-        <span> </span>
-        <span th:text="${user.getMiddle()}"></span>
-        <span> </span>
-        <span th:text="${user.getLast()}"></span>
-        <span> </span>
-        <span th:text="${user.isBlackList()}"></span><br>
-        <a th:href="@{/udelete/{id}(id=${user.getId()})}" th:text="#{button.delete}"></a>
-        <span> / </span>
-        <a th:href="@{/ublock/{id}(id=${user.getId()})}" th:text="#{button.blocklist}"></a>
-        <span> / </span>
-        <a th:href="@{/aprofile/{id}/{role}(id = ${user.getId()}, role = ${user.getRole()})}" th:text="#{course.button.show}"></a>
+        <span th:text="${kb.getUserKnowlegeBase().getLast()}"></span><br>
+        <span th:text="${kb.getLocalDate()}"></span><br>
+        <span th:text="${kb.getText()}"></span><br>
+
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/kbdelete/{id}(id=${kb.getId()})}" th:text="#{button.delete}"></a>
+        <a th:href="@{/getkbfile/{id}(id=${kb.getId()})}" th:text="#{kb.file}"></a>
     </div>
 </body>
 </html>

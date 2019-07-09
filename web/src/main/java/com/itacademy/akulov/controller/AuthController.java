@@ -8,7 +8,6 @@ import com.itacademy.akulov.entity.Role;
 import com.itacademy.akulov.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -117,7 +116,6 @@ public class AuthController {
                         @RequestBody String jsonRegData) {
 
         StringBuilder result = new StringBuilder();
-        System.out.println(jsonRegData);
         Long id = -1L;
         Gson g = new Gson();
         LoginDto loginDto = g.fromJson(jsonRegData, LoginDto.class);
@@ -125,10 +123,10 @@ public class AuthController {
         if (loginDto.getRole().equals(Role.STUDY.getName())) {
             id = userService.saveStudentUser(loginDto);
 
-            result.append(resourceBundleMessageSource.getMessage("reg.student.ready", null, LocaleContextHolder.getLocale()));
+            //result.append(resourceBundleMessageSource.getMessage("reg.student.ready", null, LocaleContextHolder.getLocale()));
         } else if (loginDto.getRole().equals(Role.TEACH.getName())) {
             id = userService.saveTeacherUser(loginDto);
-            result.append(resourceBundleMessageSource.getMessage("reg.teacher.ready", null, LocaleContextHolder.getLocale()));
+            //result.append(resourceBundleMessageSource.getMessage("reg.teacher.ready", null, LocaleContextHolder.getLocale()));
         }
         return g.toJson(ResponseDto.builder()
                 .resp(id != -1L ? "login" : "error-registration")

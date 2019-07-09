@@ -37,6 +37,7 @@ public class LoginMapper implements BaseMapper<User, LoginDto> {
     @Override
     public User mapToEntity(LoginDto dto) {
         return new User()
+                .setId(dto.getId())
                 .setEmail(dto.getEmail())
                 .setPassword(dto.getPassword())
                 .setRole(Role.valueOf(dto.getRole()))
@@ -50,29 +51,33 @@ public class LoginMapper implements BaseMapper<User, LoginDto> {
     }
 
     public StudentUser mapToStudentEntity(LoginDto dto) {
-        return new StudentUser(null, dto.getEmail(),
-                dto.getPassword(),
-                Role.valueOf(dto.getRole()),
-                UserData.builder()
+        return StudentUser.builder()
+                .email(dto.getEmail())
+                .password(dto.getPassword())
+                .role(Role.valueOf(dto.getRole()))
+                .userData(UserData.builder()
                         .lastName(dto.getLast())
                         .middleName(dto.getMiddle())
                         .firstName(dto.getName())
                         .phone(dto.getPhone())
-                        .build(),
-                false);
+                        .build())
+                .blockList(false)
+                .build();
     }
 
     public TeacherUser mapToTeacherEntity(LoginDto dto) {
-        return new TeacherUser(null, dto.getEmail(),
-                dto.getPassword(),
-                Role.valueOf(dto.getRole()),
-                UserData.builder()
+        return TeacherUser.builder()
+                .email(dto.getEmail())
+                .password(dto.getPassword())
+                .role(Role.valueOf(dto.getRole()))
+                .userData(UserData.builder()
                         .lastName(dto.getLast())
                         .middleName(dto.getMiddle())
                         .firstName(dto.getName())
                         .phone(dto.getPhone())
-                        .build(),
-                false);
+                        .build())
+                .blockList(false)
+                .build();
     }
 
     public static LoginMapper getInstance() {

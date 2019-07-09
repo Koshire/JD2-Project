@@ -2,6 +2,10 @@ function logout() {
     window.location.href = "/web/logout";
 }
 
+function allKb() {
+    window.location.href = "/web/getkb";
+}
+
 function createCourse() {
     window.location.href = "/web/createcourse";
 }

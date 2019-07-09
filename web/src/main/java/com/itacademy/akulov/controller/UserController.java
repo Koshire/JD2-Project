@@ -42,7 +42,6 @@ public class UserController {
     }
 
 
-
     @GetMapping(value = "/ublock/{id}")
     public String blockUsers(Model model, @PathVariable Long id) {
         boolean result = userService.blockById(id);
@@ -107,17 +106,17 @@ public class UserController {
             @RequestParam(name = "phone") String phone,
             @RequestParam(name = "role") String role
     ) {
-
-        Long userId = userService.updateUser(LoginDto.builder()
+        LoginDto loginDto = LoginDto.builder()
                 .id(id)
                 .role(role)
-                .password("".equals(newPassword) ? currentPassword : passwordEncoder.encode(newPassword))
+                .password(!"".equals(newPassword) ? currentPassword : passwordEncoder.encode(newPassword))
                 .email(email)
                 .name(firstname)
                 .middle(middleName)
                 .last(lastName)
                 .phone(phone)
-                .build());
+                .build();
+        Long userId = userService.updateUser(loginDto);
 
         boolean result = userId > 0;
         ServiceHelper.setMessage(model, result, resourceBundleMessageSource);

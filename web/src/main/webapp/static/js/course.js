@@ -10,6 +10,12 @@ function pagination(page, size, total, param1, param2, param3, param4) {
     };
 }
 
+function createKb() {
+    let userId = JSON.parse(window.sessionStorage.getItem("authUser"));
+    let courseId = document.getElementById("id").value;
+    window.location.href = "/web/createkb/" + courseId + "/" + userId.id;
+}
+
 function sendComment() {
     let userId = JSON.parse(window.sessionStorage.getItem("authUser"));
     let courseId = document.getElementById("id").value;
@@ -53,7 +59,7 @@ function forward() {
     let totalPages = document.getElementById("of").innerText;
     let pageSize = getPageSize();
     let page = document.getElementById("page").innerText;
-    if (page !== totalPages) {
+    if (page !== totalPages && totalPages !== '0') {
         getComments(pagination(page, pageSize, 0, document.getElementById("id").value, "", "", ""));
     }
 }

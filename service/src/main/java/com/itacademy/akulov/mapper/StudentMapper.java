@@ -71,7 +71,7 @@ public class StudentMapper implements BaseMapper<StudentUser, StudentDto> {
                         .lastName(dto.getLast())
                         .middleName(dto.getMiddle())
                         .firstName(dto.getName())
-                        .phone(dto.getName())
+                        .phone(dto.getPhone())
                         .build())
                 .blockList(dto.isBlockList())
                 .build();

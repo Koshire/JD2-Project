@@ -12,7 +12,7 @@
 <H2 th:text="#{u.profile}"></H2>
 <br>
 
-<form method="post">
+<form>
     <input type="text" id="id" name="id" size="50" th:value="${user.getId()}" hidden><br>
 
     <label for="email" th:text="#{u.email}"></label>
@@ -21,7 +21,8 @@
     <label for="newPassword" th:text="#{u.password}"></label>
     <input type="password" name="newPassword" id="newPassword" size="50"><br>
 
-    <input type="password" id="currentPassword" name="currentPassword" size="50" th:value="${user.getPassword()}" hidden><br>
+    <input type="password" id="currentPassword" name="currentPassword" size="50" th:value="${user.getPassword()}"
+           hidden><br>
 
     <label for="uname" th:text="#{u.uname}"></label>
     <input type="text" id="uname" name="uname" size="50" th:value="${user.getName()}" required><br>
@@ -43,12 +44,9 @@
     <label for="phone" th:text="#{u.phone}"></label>
     <input type="text" id="phone" name="phone" size="50" th:value="${user.getPhone()}" required>
     <br>
-    <button formaction="/web/upprofile" th:text="#{button.update}"></button>
+    <button formmethod="post" formaction="/web/upprofile" th:text="#{button.update}"></button>
+    <button formmethod="get" th:formaction="@{/myccomments/{id}(id=${user.getId()})}" th:text="#{text.show.commnets}"></button>
 </form>
-
-<br>
-<a th:href="@{/myccomments/{id}(id=${userId})}" th:text="#{text.show.commnets}"></a>
-<br>
 
 <form sec:authorize="hasAuthority('STUDY')" th:each="item: ${user.getResults()}">
     <span th th:text="${item.getCourse().getName()}"></span>
