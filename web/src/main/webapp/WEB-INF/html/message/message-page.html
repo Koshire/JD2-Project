@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello World !!!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="/web/js/changeLang.js"></script>
+</head>
+<body>
+<div th:replace="fragments :: language"></div>
+    <h1 th:text="${message}"></h1>
+    <button onclick="history.back()" th:text="#{button.back}"></button>
+</body>
+</html>

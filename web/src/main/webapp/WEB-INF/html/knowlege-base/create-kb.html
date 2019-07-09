@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8"/>
+    <title th:text="#{text.kb}">Hello world ! ! !</title>
+    <script src="/web/js/changeLang.js"></script>
+</head>
+<body>
+<div th:replace="fragments :: language"></div>
+<br>
+<H1 th:text="#{text.kb}">hello world</H1>
+
+<div>
+    <span id="userGratis"></span>
+</div>
+<br>
+<br>
+<div>
+    <form method="post" action="/web/kbdata">
+        <input type="text" id="userId" name="userId" th:value="${userId}" hidden >
+        <input type="text" id="courseId" name="courseId" th:value="${courseId}" hidden >
+        <input type="date" id="date" name="date" th:value="${date}"><br>
+        <textarea name="text" id="text" cols="100" rows="10" required></textarea><br>
+        <button type="submit" th:text="#{course.create}"></button>
+    </form>
+</div>
+</body>
+</html>

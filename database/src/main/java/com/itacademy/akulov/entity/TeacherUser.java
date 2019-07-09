@@ -6,10 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -27,15 +24,19 @@ import java.util.List;
 @DiscriminatorValue("teach_user")
 public class TeacherUser extends User {
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "course_teacher",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
-    @Fetch(FetchMode.SELECT)
     private List<Course> courses = new ArrayList<>();
 
     @Builder
-    public TeacherUser(Long id, String email, String password, Role role, UserData userData, Boolean blockList) {
-        super(id, email, password, role, userData, blockList);
+    public TeacherUser(Long id, String email, String password, Role role,
+                       UserData userData,
+                       Boolean blockList,
+                       List<CourseComments> courseComments,
+                       List<Course> courses) {
+        super(id, email, password, role, userData, blockList, courseComments);
+        this.courses = courses;
     }
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extrincludeas/spring-security">
+<head>
+    <meta charset="utf-8"/>
+    <title th:text="#{hello.world}"></title>
+    <script src="/web/js/home.js"></script>
+    <script src="/web/js/changeLang.js"></script>
+</head>
+<body onload="init()">
+<div th:replace="fragments :: language"></div>
+<br>
+<H1 th:text="#{hello.world}"></H1>
+<br>
+<div>
+    <span id="userGratis"></span>
+</div>
+<br>
+<div>
+        <input type="text" id="courseName" name="courseName" th:placeholder="#{course.name}">
+        <label for="courseType" th:text="#{course.type}"></label>
+        <select id="courseType" name="courseType">
+            <option th:each="r : ${roles}"
+                    th:value="${r.getName()}"
+                    th:text="${r.name()}"></option>
+        </select>
+        <label for="dateFrom" th:text="#{course.from}"></label>
+        <input type="date" id="dateFrom" name="dateFrom">
+        <label for="dateTo" th:text="#{course.to}"></label>
+        <input type="date" id="dateTo" name="dateTo">
+        <br>
+        <label for="PageSize3" th:text="#{course.by3}"></label>
+        <input type="radio" name="pageSize" id="PageSize3" value="3" checked onclick="radioClick()">
+        <label for="PageSize6" th:text="#{course.by6}"></label>
+        <input type="radio" name="pageSize" id="PageSize6" value="6" onclick="radioClick()">
+        <label for="PageSize9" th:text="#{course.by9}"></label>
+        <input type="radio" name="pageSize" id="PageSize9" value="9" onclick="radioClick()"><br>
+        <input type="button" onclick="show()" th:value="#{course.button.show}">
+    <div id="pages">
+        <input type="button" id="back" onclick="back()" value="<">
+        <span id="page"></span>
+        <span> / </span>
+        <span id="of"></span>
+        <input type="button" id="forward" onclick="forward()" value=">">
+    </div>
+</div>
+
+<div id="courses">
+
+</div>
+
+</body>
+</html>

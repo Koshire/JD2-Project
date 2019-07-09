@@ -14,12 +14,12 @@
         <input type="button" onclick="uProfile()" th:value="#{button.profile}">
         <input type="button" onclick="goHome()" th:value="#{button.home}">
         <input type="button" onclick="createCourse()" th:value="#{button.createcourse}">
-        <input type="button" onclick="allUsers()" th:value="#{button.allusers}">
+        <input sec:authorize="hasAuthority('ADMIN')" type="button" onclick="allUsers()" th:value="#{button.allusers}">
+        <input type="button" onclick="allKb()" th:value="#{text.kb}">
     </form>
 </div>
 
 <div th:fragment="menu">
-    <a href="/home">Мои коментарии</a>
     <a href="/home">Контакты</a>
 </div>
 </body>

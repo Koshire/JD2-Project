@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8"/>
+    <title th:text="#{course.profile}">Hello world ! ! !</title>
+    <script src="js/course.js"></script>
+    <script src="js/validate.js"></script>
+    <script src="js/changeLang.js"></script>
+</head>
+<body onload="init()">
+<div th:replace="fragments :: language"></div>
+<br>
+<H1 th:text="#{course.profile}">hello world</H1>
+
+<div>
+    <span id="userGratis"></span>
+</div>
+
+<div id="course">
+
+    <input type="number" id="id" name="id" size="50" hidden disabled><br>
+
+    <label for="name" th:text="#{course.name}">Название курса:</label><br>
+    <input type="text" id="name" name="name" size="50" disabled><br>
+
+    <label for="description" th:text="#{course.description}">Описание:</label><br>
+    <textarea id="description" name="description" cols="50" rows="5" disabled></textarea><br>
+
+    <label for="startDate" th:text="#{course.start}">Начало занятий:</label><br>
+    <input type="date" id="startDate" name="startDate" size="50" disabled><br>
+
+    <label for="duration" th:text="#{course.duration}">Длительность курса:</label><br>
+    <input type="number" id="duration" name="duration" size="50" disabled><br>
+
+    <label for="plan" th:text="#{course.plan}">План:</label><br>
+    <textarea id="plan" name="plan" cols="50" rows="5" disabled></textarea><br>
+
+    <label for="typeView" th:text="#{course.type}">Тип курса:</label><br>
+    <input type="text" id="typeView" name="typeView" size="50" disabled><br>
+    <select id="type" name="type" hidden>
+        <option th:each="type : ${types}" th:value="${type.getName()}" th:text="${type}"></option>
+    </select><br>
+    <br><br>
+    <edited sec:authorize="hasAnyAuthority('ADMIN', 'TEACH')">
+        <label for="edit" th:text="#{check.edit}">Edit</label>
+        <input type="checkbox" id="edit" onclick="courseEdit()">
+    </edited>
+    <input sec:authorize="hasAuthority('ADMIN')" type="button" disabled id="deleteButton" name="deleteButton"
+           onclick="courseDelete()"
+           th:value="#{button.delete}">
+    <input sec:authorize="hasAnyAuthority('ADMIN', 'TEACH')" type="button" disabled id="updateButton"
+           name="updateButton" onclick="courseUpdate()"
+           th:value="#{button.update}"/>
+    <input sec:authorize="hasAuthority('STUDY')" type="button" id="signUp" name="signUp" onclick="beStudent()"
+           th:value="#{button.be.student}"/>
+    <input sec:authorize="hasAuthority('TEACH')" type="button" id="beTeach" name="beTeach" onclick="beTeacher()"
+           th:value="#{button.be.teacher}"/><br>
+    <input type="button" onclick="createKb()" th:value="#{button.createkb}">
+</div>
+<br>
+<input type="button" onclick="showComments()" th:value="#{button.show.hide}">
+<div id="divComments" hidden>
+    <div>
+        <div>
+            <label for="PageSize3" th:text="#{course.by3}"></label>
+            <input type="radio" name="pageSize" id="PageSize3" value="3" checked onclick="radioClick()">
+            <label for="PageSize6" th:text="#{course.by6}"></label>
+            <input type="radio" name="pageSize" id="PageSize6" value="6" onclick="radioClick()">
+            <label for="PageSize9" th:text="#{course.by9}"></label>
+            <input type="radio" name="pageSize" id="PageSize9" value="9" onclick="radioClick()"><br>
+        </div>
+        <div id="pages">
+            <input type="button" id="back" onclick="back()" value="<">
+            <span id="page"></span>
+            <span> / </span>
+            <span id="of"></span>
+            <input type="button" id="forward" onclick="forward()" value=">">
+        </div>
+    </div>
+
+    <br>
+    <textarea id="commentText" cols="50" rows="3"></textarea>
+    <input type="button" onclick="sendComment()" th:value="#{button.send}">
+    <br>
+
+    <div id="comments">
+
+    </div>
+</div>
+<div>
+    <hr>
+    <p th:text="#{text.students}">
+        Учащиеся:
+    </p>
+</div>
+<div id="students">
+
+</div>
+<hr>
+<div>
+    <p th:text="#{text.teachers}">
+        Преподаватели:
+    </p>
+</div>
+<div id="teachers">
+
+</div>
+
+
+
+<div sec:authorize="hasAuthority('ADMIN')">
+    <br>
+    <hr>
+    <hr>
+    <span th:text="#{text.students}"></span>
+    <br>
+    <div th:each="student: ${courseData.getStudents()}">
+        <input type="text" th:value="${courseData.getId()}" name="courseId" hidden>
+        <input type="text" th:value="${student.getId()}" name="userId" hidden>
+        <span th:text="${student.getEmail()}"></span>
+        <span> </span>
+        <span th:text="${student.getName()}"></span>
+        <span> </span>
+        <span th:text="${student.getMiddle()}"></span>
+        <span> </span>
+        <span th:text="${student.getLast()}"></span>
+        <button th:onclick="|beStudentParam(${student.getId()});|" th:text="#{button.delete}"></button>
+    </div>
+    <br>
+    <span th:text="#{text.teachers}"></span>
+    <br>
+    <div th:each="teacher: ${courseData.getTeachers()}">
+        <input type="text" th:value="${courseData.getId()}" name="courseId" hidden>
+        <input type="text" th:value="${teacher.getId()}" name="userId" hidden>
+        <span th:text="${teacher.getEmail()}"></span>
+        <span> </span>
+        <span th:text="${teacher.getName()}"></span>
+        <span> </span>
+        <span th:text="${teacher.getMiddle()}"></span>
+        <span> </span>
+        <span th:text="${teacher.getLast()}"></span>
+        <button th:onclick="|beTeacherParam(${teacher.getId()});|" th:text="#{button.delete}"></button>
+    </div>
+</div>
+
+
+</body>
+</html>

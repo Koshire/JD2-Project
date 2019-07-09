@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -15,7 +16,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -40,9 +43,13 @@ public class User implements BaseEntity<Long> {
     @Column(name = "role")
     private Role role;
 
+
     @Embedded
     private UserData userData;
 
     @Column(name = "block_list")
     private Boolean blockList;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<CourseComments> courseComments;
 }
